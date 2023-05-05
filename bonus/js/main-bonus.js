@@ -54,41 +54,61 @@ let items = document.querySelectorAll(".slider-item");
 let thumbItems = document.querySelectorAll(".slider-thumb");
 
 //attribuisco la classe active all'indice 0 dell'array
-items[activeItem].classList.add("active");
-thumbItems[activeItem].classList.remove("overlay");
+// items[activeItem].classList.add("active");
+// thumbItems[activeItem].classList.remove("overlay");
 
-// //aggiunta event listner freccia di navigazione bottom
-bottomArrow.addEventListener("click", 
+//Dichiaro in due variabili i bottoni per comandare lo slider
+let prev = document.getElementById("top-arrow");
+let next = document.getElementById("bottom-arrow");
+
+items[activeItem].classList.add("active");
+thumbItems[activeItem].classList.toggle("overlay");
+
+// //aggiunta event listner freccia di navigazione next
+next.addEventListener("click", 
 function(){
     items[activeItem].classList.remove("active");
     thumbItems[activeItem].classList.toggle("overlay");
-    activeItem++;
-    items[activeItem].classList.add("active");
-    thumbItems[activeItem].classList.toggle("overlay", "");
 
-    if(items > arrayOfImages.length){
-        items[activeItem].classList.remove("active");
-        activeItem = 0;
+    if(activeItem == items.length -1){
+    activeItem = 0;
     }
+    else{
+        activeItem++;
+    }
+    items[activeItem].classList.add("active");
+    thumbItems[activeItem].classList.toggle("overlay");
 
+});
+
+// //aggiunta event listner freccia di navigazione prev
+prev.addEventListener("click", 
+function(){
+    items[activeItem].classList.remove("active");
+    thumbItems[activeItem].classList.toggle("overlay");
+
+    if(activeItem == 0){
+    activeItem = items.length -1;
+    }
+    else{
+        activeItem--;
+    }
+    items[activeItem].classList.add("active");
+    thumbItems[activeItem].classList.toggle("overlay");
+
+});
     
 
-});
+// items[activeItem].classList.remove("active");
+// thumbItems[activeItem].classList.toggle("overlay");
 
-// //aggiunta event listner freccia di navigazione top
-topArrow.addEventListener("click", 
-function(){
-    items[activeItem].classList.remove("active");
-    thumbItems[activeItem].classList.toggle("overlay");
-    activeItem--;
-
-    items[activeItem].classList.add("active");
-    thumbItems[activeItem].classList.toggle("overlay", "");
-});
-
-
-
-
+// //esecuzione condizionale per verificare se resettare lo slider o no
+// if(activeItem == items.length){
+//     activeItem = 0;
+// }
+// else{
+//     activeItem++;
+// }
 
 
 
